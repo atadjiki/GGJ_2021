@@ -1,0 +1,20 @@
+//Reference.png
+Starting point for me was the Star Trek holodeck room. I like the idea of the environment being minimal like this.
+
+//Environment.png
+Black & white seems like a good choice for the environment since the objects are all colorful. So I'm imagining a square-ish room with black & white diagonal stripes with black cubes interspersed as needed for fixed grapple points (not pictured). Will need to play around with stripe width & contrast so it's not annoying or distracting, but it should be a bit bold and weird I think.
+
+//EnvironmentBack.png
+The player starts facing this wall. Would have all necessary control info on it.
+
+//EnvironmentFront.png
+Giant window with visible faces of the people in line. Found objects are sent in the middle hole.
+
+//EnvironmentLeft.png
+Black panel with updating list of missing objects that need to be found.
+
+//EnvironmentRight.png 
+Tape player with black panel displaying track info. Plays background music. When playing, the tape is visible in an enclosed space. Pressing "eject" stops the track and launches the tape from its space. Other tapes placed in that space will begin playing.
+
+//EnvironmentEnds.png
+This is the "top" and "bottom" sides of the environment. New objects enter the game through the black holes on these sides.
