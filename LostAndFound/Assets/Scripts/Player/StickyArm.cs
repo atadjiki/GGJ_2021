@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StickyArm : MonoBehaviour
-{
-    [SerializeField] public float Range = 50;
+{ 
 
     private Interactable AttachedTo = null;
 

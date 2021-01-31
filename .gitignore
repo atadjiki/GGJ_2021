@@ -1,2 +1,8 @@
 
 *.meta
+*.meta
+LostAndFound/Assets/ArtAssets/Heads.meta
+LostAndFound/Assets/ThirdPartyTools/Pixelate Image Effect/Pixelate Image Effect HDRP.unitypackage.meta
+LostAndFound/Assets/ThirdPartyTools/Pixelate Image Effect/Pixelate Image Effect LWRP.unitypackage.meta
+LostAndFound/Assets/ThirdPartyTools/Pixelate Image Effect/Pixelate Image Effect Standrad Pipline.unitypackage.meta
+LostAndFound/Assets/ThirdPartyTools/Pixelate Image Effect/Pixelate Image Effect URP.unitypackage.meta

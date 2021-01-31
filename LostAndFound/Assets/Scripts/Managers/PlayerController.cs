@@ -12,9 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float ReelTowardsSpeed = 0.1f;
     [SerializeField] public float ReelInwardsSpeed = 0.5f;
 
+    private float Target_Range = 20;
+
     private float Lerp_Rotate = 15;
 
-    public StickyArm Arm;
+    public StickyArm Left_Arm;
+    public StickyArm Right_Arm;
 
     private Rigidbody Player_Rigidbody;
     private Camera PlayerCamera;
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.transform.gameObject.GetComponent<Interactable>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Arm.Range)
+            if (hit.transform.gameObject.GetComponent<Interactable>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
             {
                 UIManager.Instance.SetObjectInRange();
                 
@@ -67,17 +70,16 @@ public class PlayerController : MonoBehaviour
             UIManager.Instance.SetDefault();
         }
 
-        if(Arm.CurrentState != StickyArm.State.Empty)
+        if(Left_Arm.CurrentState != StickyArm.State.Empty)
         {
             Player_Rigidbody.velocity = Player_Rigidbody.velocity * 0.9f;
         }
         
     }
 
-    public void AttemptLeftArmFire()
+    public void AttemptArmFire(StickyArm arm)
     {
-
-        if(Arm.CurrentState == StickyArm.State.Empty)
+        if (arm.CurrentState == StickyArm.State.Empty)
         {
             Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
@@ -86,47 +88,67 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 //if we have hit a grapple object, tether the player to that object
-                if (hit.transform.gameObject.GetComponent<GrappleObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Arm.Range)
+                if (hit.transform.gameObject.GetComponent<GrappleObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
                 {
-                    Arm.GrabSurface(hit.transform.gameObject.GetComponent<GrappleObject>());
+                    arm.GrabSurface(hit.transform.gameObject.GetComponent<GrappleObject>());
 
                 }
                 //if we have hit a collectable, tether the player to that object
-                else if (hit.transform.gameObject.GetComponent<ItemObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Arm.Range)
+                else if (hit.transform.gameObject.GetComponent<ItemObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
                 {
-                    Arm.GrabObject(hit.transform.gameObject.GetComponent<ItemObject>());
+                    arm.GrabObject(hit.transform.gameObject.GetComponent<ItemObject>());
                 }
             }
         }
-        else if(Arm.CurrentState == StickyArm.State.AttachedToItem || Arm.CurrentState == StickyArm.State.AttachedToSurface)
+        else if (arm.CurrentState == StickyArm.State.AttachedToItem || arm.CurrentState == StickyArm.State.AttachedToSurface)
         {
-            Arm.Release();
+            arm.Release();
         }
-        
+    }
+
+    public void AttemptRightArmFire()
+    {
+        AttemptArmFire(Right_Arm);
+    }
+
+    public void AttemptRightArmReel()
+    {
+        AttemptArmReel(Right_Arm);
+    }
+
+    public void AttemptLeftArmFire()
+    {
+        AttemptArmFire(Left_Arm);
     }
 
     public void AttemptLeftArmReel()
     {
-        if(Arm.IsAttached())
+        AttemptArmReel(Left_Arm);
+    }
+
+
+    public void AttemptArmReel(StickyArm arm)
+    {
+        if (arm.IsAttached())
         {
-            if(Arm.CurrentState == StickyArm.State.AttachedToSurface)
+            if (arm.CurrentState == StickyArm.State.AttachedToSurface)
             {
-                Vector3 direction = (Arm.GetAttachedTo().transform.position - Arm.GetArmOrigin()).normalized;
+                Vector3 direction = (arm.GetAttachedTo().transform.position - arm.GetArmOrigin()).normalized;
 
                 Player_Rigidbody.AddForce(direction * ReelTowardsSpeed);
             }
-            else if(Arm.CurrentState == StickyArm.State.AttachedToItem)
+            else if (arm.CurrentState == StickyArm.State.AttachedToItem)
             {
-                Vector3 direction = (Arm.GetAttachedTo().transform.position - Arm.GetArmOrigin()).normalized * -1;
+                Vector3 direction = (arm.GetAttachedTo().transform.position - arm.GetArmOrigin()).normalized * -1;
 
-                Arm.GetAttachedTo().GetComponent<Rigidbody>().AddForce(direction * ReelInwardsSpeed);
+                arm.GetAttachedTo().GetComponent<Rigidbody>().AddForce(direction * ReelInwardsSpeed);
 
             }
-            
+
         }
-        
     }
 
+    
     internal void HandleLook(float h, float v)
     {
 

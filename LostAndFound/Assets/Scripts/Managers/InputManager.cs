@@ -35,6 +35,15 @@ public class InputManager : MonoBehaviour
             PlayerController.Instance.AttemptLeftArmReel();
         }
 
+        if (Input.GetKeyDown(Interact_Right) || Input.GetMouseButtonDown(0) || Input.GetButtonDown("RightArmFire"))
+        {
+            PlayerController.Instance.AttemptRightArmFire();
+        }
+        else if (Input.GetAxis("RightArmReel") != 0)
+        {
+            PlayerController.Instance.AttemptRightArmReel();
+        }
+
         float h, v;
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
