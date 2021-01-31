@@ -3,22 +3,7 @@ guid: 1a922352040e41049b78c30632f9c0ed
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Black
-    second: {fileID: 2100000, guid: 2b915bf6750dd394bb8780ddcc7fa7de, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Walls
-    second: {fileID: 2100000, guid: aa270b8eb03bb734b8f6d3e445d41e86, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Window
-    second: {fileID: 2100000, guid: e48e76f26e7d55847a647f3ca12048d9, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
