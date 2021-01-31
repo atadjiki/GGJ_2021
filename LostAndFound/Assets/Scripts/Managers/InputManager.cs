@@ -34,5 +34,20 @@ public class InputManager : MonoBehaviour
         {
             PlayerController.Instance.AttemptLeftArmReel();
         }
+
+        float h, v;
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+            PlayerController.Instance.HandleLook(h, v);
+        }
+        else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        {
+            h = Input.GetAxis("Mouse X");
+            v = Input.GetAxis("Mouse Y");
+            PlayerController.Instance.HandleLook(h, v);
+        }
+
     }
 }

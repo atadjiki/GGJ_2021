@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleLook();
 
         Ray ray = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
@@ -67,6 +66,12 @@ public class PlayerController : MonoBehaviour
         {
             UIManager.Instance.SetDefault();
         }
+
+        if(Arm.CurrentState != StickyArm.State.Empty)
+        {
+            Player_Rigidbody.velocity = Player_Rigidbody.velocity * 0.9f;
+        }
+        
     }
 
     public void AttemptLeftArmFire()
@@ -84,23 +89,18 @@ public class PlayerController : MonoBehaviour
                 if (hit.transform.gameObject.GetComponent<GrappleObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Arm.Range)
                 {
                     Arm.GrabSurface(hit.transform.gameObject.GetComponent<GrappleObject>());
-                    Debug.Log("Arm has attached to " + Arm.GetAttachedTo().name);
-                    Player_Rigidbody.useGravity = false;
 
                 }
                 //if we have hit a collectable, tether the player to that object
                 else if (hit.transform.gameObject.GetComponent<ItemObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Arm.Range)
                 {
                     Arm.GrabObject(hit.transform.gameObject.GetComponent<ItemObject>());
-                    Debug.Log("Arm has grabbed " + Arm.GetAttachedTo().name);
                 }
             }
         }
         else if(Arm.CurrentState == StickyArm.State.AttachedToItem || Arm.CurrentState == StickyArm.State.AttachedToSurface)
         {
             Arm.Release();
-            Debug.Log("Arm released");
-            Player_Rigidbody.useGravity = true;
         }
         
     }
@@ -111,45 +111,24 @@ public class PlayerController : MonoBehaviour
         {
             if(Arm.CurrentState == StickyArm.State.AttachedToSurface)
             {
-                Vector3 targetPos = Arm.GetAttachedTo().GetComponent<Collider>().ClosestPointOnBounds(Arm.GetAttachedTo().gameObject.transform.position);
+                Vector3 direction = (Arm.GetAttachedTo().transform.position - Arm.GetArmOrigin()).normalized;
 
-                Vector3 currentPos = Player_Rigidbody.position;
-
-                Vector3 deltaPos = Vector3.Slerp(currentPos, targetPos, Time.fixedDeltaTime * ReelTowardsSpeed);
-
-                Player_Rigidbody.MovePosition(deltaPos);
+                Player_Rigidbody.AddForce(direction * ReelTowardsSpeed);
             }
             else if(Arm.CurrentState == StickyArm.State.AttachedToItem)
             {
-                Vector3 targetPos = Arm.GetAttachedTo().GetComponent<Collider>().ClosestPointOnBounds(Arm.GetAttachedTo().gameObject.transform.position);
+                Vector3 direction = (Arm.GetAttachedTo().transform.position - Arm.GetArmOrigin()).normalized * -1;
 
-                Vector3 currentPos = Arm.GetArmOrigin();
+                Arm.GetAttachedTo().GetComponent<Rigidbody>().AddForce(direction * ReelInwardsSpeed);
 
-                Vector3 deltaPos = Vector3.Slerp(targetPos, currentPos, Time.fixedDeltaTime * ReelInwardsSpeed);
-
-                Arm.GetAttachedTo().GetComponent<Rigidbody>().MovePosition(deltaPos); 
             }
             
         }
         
     }
 
-    internal void HandleLook()
+    internal void HandleLook(float h, float v)
     {
-        float h = 0;
-        float v = 0;
-
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            h = horizontalSpeed * Input.GetAxis("Horizontal");
-            v = verticalSpeed * Input.GetAxis("Vertical");
-        }
-        else
-        {
-            h = horizontalSpeed * Input.GetAxis("Mouse X");
-            v = verticalSpeed * Input.GetAxis("Mouse Y");
-        }
-
 
         //rotate player transform left and right
 

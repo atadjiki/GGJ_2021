@@ -70,6 +70,7 @@ public class StickyArm : MonoBehaviour
     {
         AttachedTo = grappleObject;
         ArmRenderer.enabled = true;
+
         UpdateArmRenderer();
 
         CurrentState = State.AttachedToSurface;
@@ -77,6 +78,7 @@ public class StickyArm : MonoBehaviour
 
     public void Release()
     {
+
         AttachedTo = null;
         ArmRenderer.enabled = false;
 
