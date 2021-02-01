@@ -486,8 +486,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d636ac0a725cafa46821f95ef4ea58d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 25
-  verticalSpeed: 25
+  horizontalSpeed: 50
+  verticalSpeed: 50
   ReelTowardsSpeed: 5
   ReelInwardsSpeed: 0.5
   Left_Arm: {fileID: 1423113920126689607}

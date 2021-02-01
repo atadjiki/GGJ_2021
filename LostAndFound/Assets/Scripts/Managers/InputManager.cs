@@ -45,13 +45,13 @@ public class InputManager : MonoBehaviour
         }
 
         float h, v;
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.5f)
         {
             h = Input.GetAxis("Horizontal");
             v = Input.GetAxis("Vertical");
             PlayerController.Instance.HandleLook(h, v);
         }
-        else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        else if (Mathf.Abs(Input.GetAxis("Mouse X")) > 0.5f || Mathf.Abs(Input.GetAxis("Mouse Y")) > 0.5f)
         {
             h = Input.GetAxis("Mouse X");
             v = Input.GetAxis("Mouse Y");

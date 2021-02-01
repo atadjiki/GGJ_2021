@@ -3,22 +3,7 @@ guid: adb2513c8f24a9d419b94d47d124378b
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_LighterBody
-    second: {fileID: 2100000, guid: 323a7fa4001190b4f916d7733d76278a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_LighterButton
-    second: {fileID: 2100000, guid: a1a26bedb7322c34bbfd3d3f50adb3e0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_LighterWheel
-    second: {fileID: 2100000, guid: fd2ef77b54010f44486fb9de1c50b251, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
