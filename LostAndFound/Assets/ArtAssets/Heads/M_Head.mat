@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_Head
+  m_Shader: {fileID: -6465566751694194690, guid: d0058ab3f2cdda146aa6e4cd16360672,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_20CB0BA7:
+        m_Texture: {fileID: 2800000, guid: 7f9138473c63b934b87a52e7c4e9e56d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_2DE1143C:
+        m_Texture: {fileID: 2800000, guid: 098e7f4263cc28746921c63ffc7a057c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_722DD04E:
+        m_Texture: {fileID: 2800000, guid: fadc242256dfc7b409a19f647519fd22, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7A7D379F:
+        m_Texture: {fileID: 2800000, guid: 8f3422903e44a924b93532bcc3e02677, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_83FA6DA1:
+        m_Texture: {fileID: 2800000, guid: ac0791dfbe5219c40be5946dde611ad9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B189BD74:
+        m_Texture: {fileID: 2800000, guid: f042a666970d44d46ab8ef7787f6cdde, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_C8ECD4DE:
+        m_Texture: {fileID: 2800000, guid: c2c81209eb9a50b4d8a7cae982362216, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_F06EF773:
+        m_Texture: {fileID: 2800000, guid: e726017ec29780842af84b1643ac0a34, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Boolean_498AFE90: 0
+    - Boolean_D0E55B3E: 0
+    - _closeEyes: 0
+    - _openMouth: 0
+    m_Colors: []
