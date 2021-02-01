@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float ReelTowardsSpeed = 0.1f;
     [SerializeField] public float ReelInwardsSpeed = 0.5f;
 
-    private float Target_Range = 20;
+    private float Target_Range = 100;
 
     private float Lerp_Rotate = 15;
 
@@ -77,6 +77,15 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public void CreateAnchorObject(Vector3 hitPoint, Transform parentTransform)
+    {
+        GameObject AnchorObject = new GameObject();
+        AnchorObject.AddComponent<AnchorPoint>();
+        AnchorObject.name = "Anchor - " + parentTransform.gameObject.name + " " + parentTransform.childCount+1;
+        AnchorObject.transform.position = hitPoint;
+        AnchorObject.transform.parent = parentTransform;
+    }
+
     public void AttemptArmFire(StickyArm arm)
     {
         if (arm.CurrentState == StickyArm.State.Empty)
@@ -90,13 +99,19 @@ public class PlayerController : MonoBehaviour
                 //if we have hit a grapple object, tether the player to that object
                 if (hit.transform.gameObject.GetComponent<GrappleObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
                 {
+                    Debug.Log("Hit on surface " + hit.transform.gameObject.GetComponent<GrappleObject>().name);
+                    CreateAnchorObject(hit.point, hit.transform.gameObject.GetComponent<Interactable>().transform);
+
                     arm.GrabSurface(hit.transform.gameObject.GetComponent<GrappleObject>());
 
                 }
                 //if we have hit a collectable, tether the player to that object
                 else if (hit.transform.gameObject.GetComponent<ItemObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
                 {
-                    arm.GrabObject(hit.transform.gameObject.GetComponent<ItemObject>());
+                    Debug.Log("Hit on object " + hit.transform.gameObject.GetComponent<ItemObject>().name);
+                    CreateAnchorObject(hit.point, hit.transform.gameObject.GetComponent<Interactable>().transform);
+
+                    arm.GrabObject(hit.transform.gameObject.GetComponent<ItemObject>()); 
                 }
             }
         }
@@ -133,13 +148,13 @@ public class PlayerController : MonoBehaviour
         {
             if (arm.CurrentState == StickyArm.State.AttachedToSurface)
             {
-                Vector3 direction = (arm.GetAttachedTo().transform.position - arm.GetArmOrigin()).normalized;
+                Vector3 direction = (arm.GetAttachedTo().GetAnchorPointLocation() - arm.GetArmOrigin()).normalized;
 
                 Player_Rigidbody.AddForce(direction * ReelTowardsSpeed);
             }
             else if (arm.CurrentState == StickyArm.State.AttachedToItem)
             {
-                Vector3 direction = (arm.GetAttachedTo().transform.position - arm.GetArmOrigin()).normalized * -1;
+                Vector3 direction = (arm.GetAttachedTo().GetAnchorPointLocation() - arm.GetArmOrigin()).normalized * -1;
 
                 arm.GetAttachedTo().GetComponent<Rigidbody>().AddForce(direction * ReelInwardsSpeed);
 

@@ -77,6 +77,11 @@ public class StickyArm : MonoBehaviour
 
     public void Release()
     {
+        foreach(AnchorPoint anchor in AttachedTo.GetComponentsInChildren<AnchorPoint>())
+        {
+            Debug.Log("Destroying anchor point");
+            Destroy(anchor.gameObject);
+        }
 
         AttachedTo = null;
         ArmRenderer.enabled = false;
@@ -88,7 +93,7 @@ public class StickyArm : MonoBehaviour
     {
         Vector3[] points = new Vector3[ArmDensity];
         points[0] = originObject.transform.position;
-        points[points.Length-1] = AttachedTo.transform.position;
+        points[points.Length - 1] = AttachedTo.GetAnchorPointLocation(); 
 
         ArmRenderer.SetPositions(points);
     }

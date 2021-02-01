@@ -429,66 +429,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392008, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392008, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392008, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392008, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.9964929
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392008, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.08367776
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392008, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -9.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392008, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392009, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: verticalSpeed
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392009, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: horizontalSpeed
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392010, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392012, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_Drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2542497224245392012, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7041397217485401153, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
         type: 3}
       propertyPath: m_Name
@@ -800,20 +740,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 962093989}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1042348263 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2542497224245392055, guid: a46131777ddcdc44aa7a8a9efdba9b9f,
-    type: 3}
-  m_PrefabInstance: {fileID: 681859431}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &1042348264
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1042348263}
-  m_Enabled: 1
 --- !u!1 &1333697829
 GameObject:
   m_ObjectHideFlags: 0
