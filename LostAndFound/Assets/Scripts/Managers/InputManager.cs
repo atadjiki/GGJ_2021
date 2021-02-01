@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -8,9 +9,7 @@ public class InputManager : MonoBehaviour
 
     public static InputManager Instance { get { return _instance; } }
 
-    public KeyCode Interact_Left = KeyCode.A;
-    public KeyCode Interact_Right = KeyCode.D;
-    public KeyCode Pause = KeyCode.Tab;
+    private PlayerInputActions Actions;
 
     private void Awake()
     {
@@ -22,41 +21,76 @@ public class InputManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        Build();
     }
 
-    private void Update()
+    internal void Build()
     {
-        if (Input.GetKeyDown(Interact_Left) || Input.GetMouseButtonDown(0) || Input.GetButtonDown("LeftArmFire"))
+        Actions = new PlayerInputActions();
+
+        Actions.Player.LeftArmFire.performed += ctx => HandleLeftArmFire();
+        Actions.Player.RightArmFire.performed += ctx => HandleRightArmFire();
+
+        Actions.Enable();
+
+        Cursor.visible = false;
+    }
+
+    public void ToggleControls(bool flag)
+    {
+        if(flag)
         {
-            PlayerController.Instance.AttemptLeftArmFire();
+            Actions.Enable();
         }
-        else if(Input.GetAxis("LeftArmReel") != 0)
+        else
+        {
+            Actions.Disable();
+        }
+    }
+
+    public void HandleLeftArmFire()
+    {
+        PlayerController.Instance.AttemptLeftArmFire();
+    }
+
+    public void HandleLeftArmReel()
+    {
+        if(Actions.Player.LeftArmReel.ReadValue<float>() != 0)
         {
             PlayerController.Instance.AttemptLeftArmReel();
         }
+    }
 
-        if (Input.GetKeyDown(Interact_Right) || Input.GetMouseButtonDown(0) || Input.GetButtonDown("RightArmFire"))
-        {
-            PlayerController.Instance.AttemptRightArmFire();
-        }
-        else if (Input.GetAxis("RightArmReel") != 0)
+    public void HandleRightArmFire()
+    {
+        PlayerController.Instance.AttemptRightArmFire();
+    }
+
+    public void HandleRightArmReel()
+    {
+        if (Actions.Player.RightArmReel.ReadValue<float>() != 0)
         {
             PlayerController.Instance.AttemptRightArmReel();
         }
+    }
 
-        float h, v;
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+    public void HandleLook()
+    {
+        Vector2 LookVector = Actions.Player.Look.ReadValue<Vector2>();
+
+        PlayerController.Instance.HandleLook(LookVector.x, LookVector.y);
+    }
+
+    private void FixedUpdate()
+    {
+        if(Actions.Player.Start.triggered)
         {
-            h = Input.GetAxis("Horizontal");
-            v = Input.GetAxis("Vertical");
-            PlayerController.Instance.HandleLook(h, v);
-        }
-        else if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-        {
-            h = Input.GetAxis("Mouse X");
-            v = Input.GetAxis("Mouse Y");
-            PlayerController.Instance.HandleLook(h, v);
+            //pull up menu
         }
 
+        HandleLook();
+        HandleLeftArmReel();
+        HandleRightArmReel();
     }
 }

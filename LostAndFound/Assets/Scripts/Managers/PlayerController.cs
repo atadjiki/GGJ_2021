@@ -77,14 +77,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void CreateAnchorObject(Vector3 hitPoint, Transform parentTransform)
-    {
-        GameObject AnchorObject = new GameObject();
-        AnchorObject.AddComponent<AnchorPoint>();
-        AnchorObject.name = "Anchor - " + parentTransform.gameObject.name + " " + parentTransform.childCount+1;
-        AnchorObject.transform.position = hitPoint;
-        AnchorObject.transform.parent = parentTransform;
-    }
+    
 
     public void AttemptArmFire(StickyArm arm)
     {
@@ -99,19 +92,16 @@ public class PlayerController : MonoBehaviour
                 //if we have hit a grapple object, tether the player to that object
                 if (hit.transform.gameObject.GetComponent<GrappleObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
                 {
-                    Debug.Log("Hit on surface " + hit.transform.gameObject.GetComponent<GrappleObject>().name);
-                    CreateAnchorObject(hit.point, hit.transform.gameObject.GetComponent<Interactable>().transform);
+                    Debug.Log("Hit on " + hit.transform.gameObject.GetComponent<GrappleObject>().name + "at" + hit.point);
 
-                    arm.GrabSurface(hit.transform.gameObject.GetComponent<GrappleObject>());
+                    arm.RegisterAnchor(hit.point, hit.transform.gameObject.GetComponent<GrappleObject>());
 
                 }
                 //if we have hit a collectable, tether the player to that object
                 else if (hit.transform.gameObject.GetComponent<ItemObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
                 {
-                    Debug.Log("Hit on object " + hit.transform.gameObject.GetComponent<ItemObject>().name);
-                    CreateAnchorObject(hit.point, hit.transform.gameObject.GetComponent<Interactable>().transform);
-
-                    arm.GrabObject(hit.transform.gameObject.GetComponent<ItemObject>()); 
+                    Debug.Log("Hit on " + hit.transform.gameObject.GetComponent<ItemObject>().name + "at" + hit.point);
+                    arm.RegisterAnchor(hit.point, hit.transform.gameObject.GetComponent<ItemObject>());
                 }
             }
         }
@@ -148,13 +138,13 @@ public class PlayerController : MonoBehaviour
         {
             if (arm.CurrentState == StickyArm.State.AttachedToSurface)
             {
-                Vector3 direction = (arm.GetAttachedTo().GetAnchorPointLocation() - arm.GetArmOrigin()).normalized;
+                Vector3 direction = (arm.GetAnchorPointLocation() - arm.GetArmOrigin()).normalized;
 
                 Player_Rigidbody.AddForce(direction * ReelTowardsSpeed);
             }
             else if (arm.CurrentState == StickyArm.State.AttachedToItem)
             {
-                Vector3 direction = (arm.GetAttachedTo().GetAnchorPointLocation() - arm.GetArmOrigin()).normalized * -1;
+                Vector3 direction = (arm.GetAnchorPointLocation() - arm.GetArmOrigin()).normalized * -1;
 
                 arm.GetAttachedTo().GetComponent<Rigidbody>().AddForce(direction * ReelInwardsSpeed);
 

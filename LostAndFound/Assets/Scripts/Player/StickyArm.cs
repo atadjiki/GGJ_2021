@@ -15,8 +15,11 @@ public class StickyArm : MonoBehaviour
     public enum State { Empty, AttachedToSurface, AttachedToItem };
     public State CurrentState = State.Empty;
 
+    AnchorPoint currentAnchor;
+
     private void Awake()
     {
+
         ArmRenderer = GetComponent<LineRenderer>();
         originObject = GetComponentInChildren<LineOrigin>();
 
@@ -56,7 +59,19 @@ public class StickyArm : MonoBehaviour
         UpdateArmRenderer();
     }
 
-    public void GrabObject(ItemObject itemObject)
+    public void RegisterAnchor(Vector3 HitPoint, ItemObject item)
+    {
+        CreateAnchorObject(HitPoint, item.transform);
+        GrabObject(item);
+    }
+
+    public void RegisterAnchor(Vector3 HitPoint, GrappleObject surface)
+    {
+        CreateAnchorObject(HitPoint, surface.transform);
+        GrabSurface(surface);
+    }
+
+    internal void GrabObject(ItemObject itemObject)
     {
         AttachedTo = itemObject;
         ArmRenderer.enabled = true;
@@ -65,7 +80,7 @@ public class StickyArm : MonoBehaviour
         CurrentState = State.AttachedToItem;
     }
 
-    public void GrabSurface(GrappleObject grappleObject)
+    internal void GrabSurface(GrappleObject grappleObject)
     {
         AttachedTo = grappleObject;
         ArmRenderer.enabled = true;
@@ -77,10 +92,11 @@ public class StickyArm : MonoBehaviour
 
     public void Release()
     {
-        foreach(AnchorPoint anchor in AttachedTo.GetComponentsInChildren<AnchorPoint>())
+
+        if(currentAnchor != null && currentAnchor.gameObject != null)
         {
-            Debug.Log("Destroying anchor point");
-            Destroy(anchor.gameObject);
+            Destroy(currentAnchor.gameObject);
+            currentAnchor = null;
         }
 
         AttachedTo = null;
@@ -93,7 +109,7 @@ public class StickyArm : MonoBehaviour
     {
         Vector3[] points = new Vector3[ArmDensity];
         points[0] = originObject.transform.position;
-        points[points.Length - 1] = AttachedTo.GetAnchorPointLocation(); 
+        points[points.Length - 1] = GetAnchorPointLocation();
 
         ArmRenderer.SetPositions(points);
     }
@@ -101,5 +117,28 @@ public class StickyArm : MonoBehaviour
     public Vector3 GetArmOrigin()
     {
         return originObject.transform.position;
+    }
+
+    public void CreateAnchorObject(Vector3 hitPoint, Transform parentTransform)
+    {
+        GameObject AnchorObject = new GameObject();
+        AnchorObject.AddComponent<AnchorPoint>();
+        AnchorObject.name = "Anchor - " + parentTransform.gameObject.name + " " + (parentTransform.childCount + 1);
+        AnchorObject.transform.position = hitPoint;
+        AnchorObject.transform.parent = parentTransform;
+
+        currentAnchor = AnchorObject.GetComponent<AnchorPoint>();
+    }
+
+    public Vector3 GetAnchorPointLocation()
+    {
+        if(currentAnchor != null && currentAnchor.gameObject != null)
+        {
+            return currentAnchor.gameObject.transform.position;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
     }
 }
