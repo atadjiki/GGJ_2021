@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7485959924307839022}
   - component: {fileID: 7485959924307839018}
   m_Layer: 0
-  m_Name: Ring
+  m_Name: SilverRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7719751618861492052}
-  m_LocalRotation: {x: -0.5812745, y: -0.38214114, z: -0.3790006, w: 0.61028415}
+  m_LocalRotation: {x: -0.581278, y: -0.3821403, z: -0.3790005, w: 0.6102814}
   m_LocalPosition: {x: -1.44, y: 0.08, z: -1.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -92,8 +92,8 @@ Rigidbody:
   m_GameObject: {fileID: 7719751618861492052}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.5
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

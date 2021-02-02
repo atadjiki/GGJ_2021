@@ -25,6 +25,11 @@ public class InputManager : MonoBehaviour
         Build();
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     internal void Build()
     {
         Actions = new PlayerInputActions();

@@ -321,6 +321,16 @@ PrefabInstance:
       propertyPath: horizontalSpeed
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1423113921413200578, guid: fa2bc30fd09397c47b3e06687c2611eb,
+        type: 3}
+      propertyPath: ReelInwardsSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423113921413200578, guid: fa2bc30fd09397c47b3e06687c2611eb,
+        type: 3}
+      propertyPath: ReelTowardsSpeed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1423113921413200579, guid: fa2bc30fd09397c47b3e06687c2611eb,
         type: 3}
       propertyPath: m_RootOrder
@@ -379,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 1423113921413200583, guid: fa2bc30fd09397c47b3e06687c2611eb,
         type: 3}
       propertyPath: m_Drag
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1423113921413200583, guid: fa2bc30fd09397c47b3e06687c2611eb,
         type: 3}
