@@ -3,12 +3,7 @@ guid: 867b994326302764da5edad1ea16b602
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_BeerCan
-    second: {fileID: 2100000, guid: 75b043e150ddd0f49b1ca20589724637, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

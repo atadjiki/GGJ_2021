@@ -3,32 +3,7 @@ guid: 258a86c175aeedf4eb29298db6bb0ae4
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Bread
-    second: {fileID: 2100000, guid: b0cf82efaa948c541b1ce8de41ec9172, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Cheese
-    second: {fileID: 2100000, guid: bb1c1871405c2a744afb2ec6f144427d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Lettuce
-    second: {fileID: 2100000, guid: 23f777103f5c26d488ba9ecc5e9e5099, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Meat
-    second: {fileID: 2100000, guid: 563b69cbb99c2d049bfef5f3ac345556, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Tomato
-    second: {fileID: 2100000, guid: 9175e05e3272d204fa2b2bd927402c84, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

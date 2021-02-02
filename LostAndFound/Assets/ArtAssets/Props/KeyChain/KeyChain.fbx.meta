@@ -3,22 +3,7 @@ guid: 2debad7c991e7d54eaf1d0ebe25d8d0c
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Die
-    second: {fileID: 2100000, guid: 83c79164eb4adc94791eccb65e03c3f9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Key
-    second: {fileID: 2100000, guid: 921dfe244f941ff43aa50452ea362aa4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Silver
-    second: {fileID: 2100000, guid: 5d4a4084bbc95b64ea4678fa95a61c9a, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

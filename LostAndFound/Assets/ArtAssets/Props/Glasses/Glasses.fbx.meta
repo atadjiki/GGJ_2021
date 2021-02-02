@@ -3,17 +3,7 @@ guid: 5cd9ea06341a23c4aaa7e7d74f89898f
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_GlassesFrame
-    second: {fileID: 2100000, guid: 9c2ff9eb2b9957a43afea9ae9173faf1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_GlassesLenses
-    second: {fileID: 2100000, guid: 1dacb7c8eff7580478c6ec5112083629, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

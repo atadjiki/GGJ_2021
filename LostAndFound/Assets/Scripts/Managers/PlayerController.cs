@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody Player_Rigidbody;
     private Camera PlayerCamera;
 
+    public Transform Left_ItemSlot;
+    public Transform Right_ItemSlot;
+
     public static PlayerController Instance { get { return _instance; } }
 
     private void Awake()
@@ -75,6 +78,14 @@ public class PlayerController : MonoBehaviour
             Player_Rigidbody.velocity = Player_Rigidbody.velocity * 0.9f;
         }
         
+        if(Left_Arm.CurrentState == StickyArm.State.AttachedToSurface || Left_Arm.CurrentState == StickyArm.State.AttachedToItem)
+        {
+            AttemptLeftArmReel();
+        }
+        if(Right_Arm.CurrentState == StickyArm.State.AttachedToSurface || Right_Arm.CurrentState == StickyArm.State.AttachedToItem)
+        {
+            AttemptRightArmReel();
+        }
     }
 
     
@@ -92,7 +103,7 @@ public class PlayerController : MonoBehaviour
                 //if we have hit a grapple object, tether the player to that object
                 if (hit.transform.gameObject.GetComponent<GrappleObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
                 {
-                    Debug.Log("Hit on " + hit.transform.gameObject.GetComponent<GrappleObject>().name + "at" + hit.point);
+                    Debug.Log("Hit on " + hit.transform.gameObject.GetComponent<GrappleObject>().name + " at " + hit.point);
 
                     arm.RegisterAnchor(hit.point, hit.transform.gameObject.GetComponent<GrappleObject>());
 
@@ -100,13 +111,20 @@ public class PlayerController : MonoBehaviour
                 //if we have hit a collectable, tether the player to that object
                 else if (hit.transform.gameObject.GetComponent<ItemObject>() != null && Vector3.Distance(this.transform.position, hit.transform.position) <= Target_Range)
                 {
-                    Debug.Log("Hit on " + hit.transform.gameObject.GetComponent<ItemObject>().name + "at" + hit.point);
+                    Debug.Log("Hit on " + hit.transform.gameObject.GetComponent<ItemObject>().name + " at " + hit.point);
                     arm.RegisterAnchor(hit.point, hit.transform.gameObject.GetComponent<ItemObject>());
                 }
             }
         }
-        else if (arm.CurrentState == StickyArm.State.AttachedToItem || arm.CurrentState == StickyArm.State.AttachedToSurface)
+        else if (arm.CurrentState == StickyArm.State.AttachedToSurface)
         {
+            arm.Release();
+        }
+        else if(arm.CurrentState == StickyArm.State.AttachedToItem)
+        {
+            //arm.GetAttachedTo().gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 100f, ForceMode.Impulse);
+            arm.GetAttachedTo().gameObject.GetComponent<ItemObject>().Release();
+            arm.GetAttachedTo().gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 50f, ForceMode.Impulse);
             arm.Release();
         }
     }
@@ -164,5 +182,35 @@ public class PlayerController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Slerp(Player_Rigidbody.rotation, Player_Rigidbody.rotation * deltaRotation, Time.fixedDeltaTime * Lerp_Rotate);
 
         Player_Rigidbody.MoveRotation(targetRotation);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Left_Arm.CurrentState == StickyArm.State.AttachedToItem && Left_Arm.GetAttachedTo().name == other.name)
+        {
+            Left_Arm.GetAttachedTo().gameObject.GetComponent<ItemObject>().Grab(Left_ItemSlot);
+        }
+        if (Right_Arm.CurrentState == StickyArm.State.AttachedToItem && Right_Arm.GetAttachedTo().name == other.name)
+        {
+            Right_Arm.GetAttachedTo().gameObject.GetComponent<ItemObject>().Grab(Right_ItemSlot);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (Left_Arm.CurrentState == StickyArm.State.AttachedToItem && Left_Arm.GetAttachedTo().name == other.name)
+        {
+            if (!Left_Arm.GetAttachedTo().gameObject.GetComponent<ItemObject>().attached)
+            {
+                Left_Arm.GetAttachedTo().gameObject.GetComponent<ItemObject>().Grab(Left_ItemSlot);
+            }
+        }
+        if (Right_Arm.CurrentState == StickyArm.State.AttachedToItem && Right_Arm.GetAttachedTo().name == other.name)
+        {
+            if (!Right_Arm.GetAttachedTo().gameObject.GetComponent<ItemObject>().attached)
+            {
+                Right_Arm.GetAttachedTo().gameObject.GetComponent<ItemObject>().Grab(Right_ItemSlot);
+            }
+        }
     }
 }

@@ -35,7 +35,9 @@ public class InputManager : MonoBehaviour
         Actions = new PlayerInputActions();
 
         Actions.Player.LeftArmFire.performed += ctx => HandleLeftArmFire();
+        Actions.Player.LeftArmFire.canceled += ctx => HandleLeftArmRelease();
         Actions.Player.RightArmFire.performed += ctx => HandleRightArmFire();
+        Actions.Player.RightArmFire.canceled += ctx => HandleRightArmRelease();
 
         Actions.Enable();
 
@@ -59,6 +61,11 @@ public class InputManager : MonoBehaviour
         PlayerController.Instance.AttemptLeftArmFire();
     }
 
+    public void HandleLeftArmRelease()
+    {
+        PlayerController.Instance.AttemptLeftArmFire();
+    }
+
     public void HandleLeftArmReel()
     {
         if(Actions.Player.LeftArmReel.ReadValue<float>() != 0)
@@ -68,6 +75,10 @@ public class InputManager : MonoBehaviour
     }
 
     public void HandleRightArmFire()
+    {
+        PlayerController.Instance.AttemptRightArmFire();
+    }
+    public void HandleRightArmRelease()
     {
         PlayerController.Instance.AttemptRightArmFire();
     }
