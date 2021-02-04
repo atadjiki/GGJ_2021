@@ -1,0 +1,8 @@
+  2/4/2021 7:50:50 AM: Starting composition “Base 2”.
+
+  Output To: E:\Games\_GameJams\GGJ_2021\AfterEffectsProject\Exports\Pizza.avi    2/4/2021 7:51:00 AM: Finished composition “Base 2”.
+
+
+  Total Time Elapsed: 10 Seconds
+Log closed on 2/4/2021 at 7:51:00 AM
+
